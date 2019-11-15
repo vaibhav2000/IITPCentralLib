@@ -52,7 +52,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 ?>
 
-
+<br>
+<br>
+<br>
+<br>
+Please Proceed <a href="admin.php">here</a> if you are the admin.
 
 <div class = "contentholder">
   <div class="checkout"></div> 

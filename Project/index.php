@@ -72,6 +72,8 @@ echo "<h2>Search Results</h2>";
  $guess= explode(" ",$search); 
 
  $unique= array(); 
+
+ echo "Suggestions: ";
  for($i=0;$i<count($guess);$i++)
   { 
 
@@ -92,7 +94,7 @@ echo "<h2>Search Results</h2>";
     $curr= $temp[$j];
     
     //See Search keys from here vab!
-    // echo $curr.'<br>';
+    echo $curr.',';
 
     // $q= "select * from book where title like '%$curr%' or author like '%$curr%' or bookID like '%$curr%' or type like '%$curr%' or category like '%$curr%' or isbnNO like '%$curr%' ";   
 
@@ -122,21 +124,7 @@ echo "<h2>Search Results</h2>";
     
     if(count($unique)>0)  
       {
-        ?>
-         <table class="table table-bordered table-hover"   >
-  
-         <thead class="thead-dark" >
-         <tr>
-     <th>BookID</th>
-     <th>Title</th>
-     <th>Author</th>
-     <th>Publisher</th>
-     <th>PublisherID</th>
-     <th>Category</th>
-     <th>ISBN no.</th>
-   </tr>
-       </thead>
-         <?php 
+       
       
     for($j=0;$j<count($unique);$j++) 
       {
@@ -149,24 +137,35 @@ echo "<h2>Search Results</h2>";
 
       $res = mysqli_query($conn,$q);
 
-
+     echo "<br><br>";
       while($row = mysqli_fetch_assoc($res)) {
-                    echo "<tr>";
-                    echo "<td>".$row["bookID"]."</td>";
-                    echo "<td>".ucwords($row["title"])."</td>";
-                    echo "<td>".ucwords($row["author"])."</td>";
-                    echo "<td>".ucwords($row["publishername"])."</td>";
-                    echo "<td>".ucwords($row["publisherID"])."</td>";
-                    echo "<td>".ucwords($row["category"])."</td>";
-                    echo "<td>".$row["isbnNO"]."</td>"; 
-                    echo "</tr>";
+                  
+           ?>
+                  
+<div class="card" style="width:50%;margin: auto;background-color: rgb(194, 194, 194);text-align: left;">
+  <div class="card-body">
+    <h4 class="card-title"> <a style="text-decoration:none;" target="_blank" href=<?php echo "'https://www.google.com/search?q=".str_replace(' ','+',ucwords($row["title"]))."'";?>><?php echo ucwords($row["title"]); ?> </a> </h4>
+    <p class="card-text" style="margin-left: 35%;">
+      <?php echo "-By ".ucwords($row["author"]); ?>
+    </p>
+    <p class="card-text">
+    <?php echo "<strong>BookID:</strong> ".($row["bookID"]); ?><br> 
+    <?php echo "<strong>Publisher:</strong> ".ucwords($row["publishername"]); ?><br> 
+    <?php echo "<strong>PublisherID:</strong> ".($row["publisherID"]); ?><br> 
+    <?php echo "<strong>Category:</strong> ".ucwords($row["category"]); ?><br> 
+    <?php echo "<strong>ISBN:</strong> ".($row["isbnNO"]); ?><br> 
+    </p>
+    </div>
+</div>
+
+<br>
+                  
+           <?php       
+                  
+                  
                   }
         }   
-        
-        ?>
-        </table>
-        <?php
-        
+       
     }
     else
      echo "No Match Found.<br>";

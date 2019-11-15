@@ -76,7 +76,7 @@ else{
  <form  action="" method="POST">
  <input style="border: medium solid black;" type="email" name= "email" required="required" placeholder="Email Here..."><br><br>
  <input  style="border: medium solid black;"  type="text" name= "bookID" required="required" placeholder="Book ID here..."><br><br>
-  <p>Issue Date: <?php echo date('Y-m-d');?>  </p>
+  <p>Return Date: <?php echo date('Y-m-d');?>  </p>
   <input type="submit">
 </div>
 

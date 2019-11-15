@@ -52,41 +52,32 @@ echo "<br><br><br><br><br>";
 
     if(mysqli_num_rows($res) > 0 )
      { 
-    ?>
-    <table class="table table-bordered table-hover" style="width:60%; margin-left:5%;" >
-     <thead class="thead-dark" >
-     <tr>
-     <th>BookID</th>
-     <th>Title</th>
-     <th>Author</th>
-     <th>Category</th>
-     <th>ISBN No.</th>
-     <th>Return Date</th>
-     </tr>
-       </thead>
-       <?php
+      while($row = mysqli_fetch_assoc($res)) {
+       
+        ?>
 
-while($row = mysqli_fetch_assoc($res)) {
-              echo "<tr>";
-              echo "<td>".$row["finalID"]."</td>";
-              echo "<td>".ucwords($row["title"])."</td>"; 
-              echo "<td>".ucwords($row["author"])."</td>"; 
-              echo "<td>".ucwords($row["category"])."</td>"; 
-              echo "<td>".$row["isbnNO"]."</td>";  
-              echo "<td>".$row["returnDate"]."</td>"; 
-              
-              echo "</tr>";
-              
-              // echo $row['datefine']."<br>";
+<div class="card" style="width:400px;margin-left: 5%;background-color: rgb(194, 194, 194);text-align: left;">
+  <div class="card-body">
+    <h4 class="card-title"> <a style="text-decoration:none;" target="_blank" href=<?php echo "'https://www.google.com/search?q=".str_replace(' ','+',ucwords($row["title"]))."'";?>><?php echo ucwords($row["title"]); ?> </a> </h4>
+    <p class="card-text" style="margin-left: 35%;">
+      <?php echo "By ".ucwords($row["author"]); ?>
+    </p>
+    <p class="card-text">
+    <?php echo "<strong>BookID:</strong> ".ucwords($row["finalID"]); ?><br> 
+    <?php echo "<strong>Category:</strong> ".ucwords($row["category"]); ?><br> 
+    <?php echo "<strong>ISBN:</strong> ".ucwords($row["isbnNO"]); ?><br> 
+    <?php echo "<strong>Return Date:</strong> ".ucwords($row["returnDate"]); ?><br> 
+    </p>
+    </div>
+</div>
+<br>
 
-              if($row["datefine"]>0)
-                $count = $count + $row['datefine']*5;
+        <?php
 
+        if($row["datefine"]>0)
+        $count = $count + $row['datefine']*5;
 
-             
-            }
-        
-
+      } 
      }
      else 
       echo "You currently haven't issued any books.";
@@ -98,7 +89,7 @@ while($row = mysqli_fetch_assoc($res)) {
   $fine= $row['fine']+ $count;
   echo "<h3 style= 'text-align:left !important;margin-left: 5% '>Total Fine: $fine INR</h3>";
    
-   
+
     }
   ?>
 
