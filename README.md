@@ -34,4 +34,6 @@ added to the user with the inputted email after multiplying by five.
 Fine Transaction just requires the librarian to enter the email of the library member
 who has submitted the fine and the fine gets updated.
 
+## Main Page
 ![Screenshot](Images/1.png)
+
