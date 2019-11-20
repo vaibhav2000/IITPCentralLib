@@ -1,9 +1,14 @@
 <?php
+session_start();
 require "spellcheckutil.php"   ;
 include('config.php');
-session_start();
-?>
 
+if(!isset($_SESSION['curradmin']))
+{ 
+    header('location: admin.php');
+    die();
+}
+?>
 <html>
 <head>
 <title>BookSearch</title>
@@ -14,14 +19,7 @@ session_start();
 <link href='https://fonts.googleapis.com/css?family=Roboto Mono' rel='stylesheet'>
 </head>
 <body>
-  
-<?php
-if(!isset($_SESSION['curradmin']))
-{ 
-    header('location: admin.php');
-    die();
-}
-?>
+ 
  
 <nav class="fixed-top navbar navbar-expand-sm navbar-dark" style="background-color: black;">
   <a class="navbar-brand" href=".">IITP Central Library</a>
@@ -48,8 +46,16 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
     if(!mysqli_query($conn,$q))
      die("Error Updating Data: ".mysqli_error($conn));
 
+
      $res = mysqli_query($conn,$q);
      $row = mysqli_fetch_assoc($res);
+
+
+     echo "<br>"."<br>"."<br>"."<br>";
+     if(mysqli_num_rows($res)==0)
+       die("This book has not been issued by this user");
+      
+
      $fine= $row['finedays'];
 
     
@@ -60,7 +66,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
      mysqli_query($conn,$q);
    
 
-     echo "<br>"."<br>"."<br>"."<br>";
      echo "This book has now been returned"; 
 }
 else{

@@ -1,7 +1,9 @@
 <?php
+session_start();
 require "spellcheckutil.php"   ;
 include('config.php');
-session_start();
+
+
 ?>
 
 <html>
@@ -102,7 +104,6 @@ echo "<h2>Search Results</h2>";
     on publishedby.publisherID= publisher.publisherID where book.title like '%$curr%' or book.author like '%$curr%' or book.bookID like '%$curr%' or book.type like '%$curr%' or book.category like '%$curr%' 
     or book.isbnNO like '%$curr%' or publisher.name like '%$curr%'; ";
 
-         
 
          $res = mysqli_query($conn,$q);
 

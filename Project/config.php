@@ -1,10 +1,6 @@
 <?php
 
-$port = 'localhost';
-$username= 'root';
-$pass = 'password';
-
-$conn= mysqli_connect($port,$username,$pass);
+$conn = mysqli_connect('localhost','root','password');
 
 if(!$conn)
  {

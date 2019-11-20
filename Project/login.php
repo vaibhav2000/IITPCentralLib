@@ -1,3 +1,29 @@
+<?php
+session_start();
+include("config.php");
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+ 
+    $email = $_POST['email'];
+    $pass= $_POST['pass'];
+     
+    $q= "select email from librarymember where email='$email' and password='$pass' ";
+    
+    $res = mysqli_query($conn,$q);
+    
+    if(mysqli_num_rows($res)==1)
+     {
+           $_SESSION['curruser']= $email;
+           header('location: index.php');
+     }
+    else  
+    {
+        echo "<div class='placeright'>Invalid Credentials</div>";
+    }
+    
+}
+?>
+
 <html>
 <head>
 <link rel="stylesheet" href="outline.css">
@@ -25,32 +51,6 @@
 </nav>
 
 
-
-<?php
-include("config.php");
-session_start();
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
- 
-    $email = $_POST['email'];
-    $pass= $_POST['pass'];
-     
-    $q= "select email from librarymember where email='$email' and password='$pass' ";
-    
-    $res = mysqli_query($conn,$q);
-    
-    if(mysqli_num_rows($res)==1)
-     {
-           $_SESSION['curruser']= $email;
-           header('location: index.php');
-     }
-    else  
-    {
-        echo "<div class='placeright'>Invalid Credentials</div>";
-    }
-    
-}
-?>
 
 <br>
 <br>

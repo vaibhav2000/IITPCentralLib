@@ -1,9 +1,15 @@
 <?php
+session_start();
 require "spellcheckutil.php"   ;
 include('config.php');
-session_start();
-?>
 
+if(!isset($_SESSION['curradmin']))
+{ 
+    header('location: admin.php');
+    die();
+}
+?>
+ 
 <html>
 <head>
 <title>BookSearch</title>
@@ -15,14 +21,7 @@ session_start();
 </head>
 <body>
   
-<?php
-if(!isset($_SESSION['curradmin']))
-{ 
-    header('location: admin.php');
-    die();
-}
-?>
- 
+
 <nav class="fixed-top navbar navbar-expand-sm navbar-dark" style="background-color: black;">
   <a class="navbar-brand" href=".">IITP Central Library</a>
   <ul class="nav navbar-nav ml-auto">

@@ -1,9 +1,14 @@
 <?php
+session_start();
 require "spellcheckutil.php"   ;
 include('config.php');
-session_start();
-?>
 
+if(!isset($_SESSION['curradmin']))
+{ 
+    header('location: admin.php');
+    die();
+}
+?>
 <html>
 <head>
 <title>BookSearch</title>
@@ -15,13 +20,7 @@ session_start();
 </head>
 <body>
   
-<?php
-if(!isset($_SESSION['curradmin']))
-{ 
-    header('location: admin.php');
-    die();
-}
-?>
+
  
 <nav class="fixed-top navbar navbar-expand-sm navbar-dark" style="background-color: black;">
   <a class="navbar-brand" href=".">IITP Central Library</a>
@@ -41,11 +40,18 @@ if(!isset($_SESSION['curradmin']))
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    echo "<br>"."<br>"."<br>"."<br>";
      
+    $q= "select * from issues where bookID=".$_POST['bookID'].";";
+    echo $q;
+    $res = mysqli_query($conn,$q);
+    
+    if(mysqli_num_rows($res)>0)
+     die("This book has already been issued");
+
 
     $q= "insert into issues values('".$_POST['email']."','".$_POST['bookID']."',curdate(), date_add(curdate(),interval 30 day));";
  
-    echo "<br>"."<br>"."<br>"."<br>";
     if(!mysqli_query($conn,$q))
      die("Error Updating Data: ".mysqli_error($conn));
 

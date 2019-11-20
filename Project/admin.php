@@ -1,3 +1,29 @@
+<?php
+session_start();
+include("config.php");
+
+if($_SERVER["REQUEST_METHOD"] == "POST") {
+ 
+    $email = $_POST['username'];
+    $pass= $_POST['pass'];
+     
+    $q= "select username from libraryadmin where username='$email' and password='$pass' ";
+    $res = mysqli_query($conn,$q);
+    
+    if(mysqli_num_rows($res)==1)
+     {
+           $_SESSION['curradmin']= $email;
+           header('location: adminpower.php');
+           exit;
+          }
+    else  
+    {
+        echo "<div class='placeright'>Invalid Credentials</div>";
+    }
+    
+}
+?>
+
 <html>
 <head>
 <link rel="stylesheet" href="outline.css">
@@ -23,32 +49,6 @@
 </nav>
 
 
-
-<?php
-include("config.php");
-session_start();
-
-if($_SERVER["REQUEST_METHOD"] == "POST") {
- 
-    $email = $_POST['username'];
-    $pass= $_POST['pass'];
-     
-    $q= "select username from libraryadmin where username='$email' and password='$pass' ";
-    $res = mysqli_query($conn,$q);
-    
-    if(mysqli_num_rows($res)==1)
-     {
-           $_SESSION['curradmin']= $email;
-           header('location: adminpower.php');
-                 
-     }
-    else  
-    {
-        echo "<div class='placeright'>Invalid Credentials</div>";
-    }
-    
-}
-?>
 
 
 

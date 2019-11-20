@@ -1,3 +1,8 @@
+<?php
+session_start();
+include('config.php');
+?>
+
 <html>
  <head>
   <title>Register</title>
@@ -27,9 +32,6 @@
 
 
 <?php
-include('config.php');
-
-session_start();
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
   

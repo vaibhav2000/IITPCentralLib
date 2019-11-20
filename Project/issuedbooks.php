@@ -1,7 +1,12 @@
 <?php
-include('config.php');
 session_start();
-?>
+include('config.php');
+
+if(!isset($_SESSION['curruser']))
+   header('location: index.php');
+else
+   {
+ ?>
 
 <html>
 <head>
@@ -34,11 +39,8 @@ session_start();
 
 
 
-<?php
-if(!isset($_SESSION['curruser']))
-   header('location: index.php');
-else
-   {
+
+ <?php    
 
 echo "<br><br><br><br><br>";
 

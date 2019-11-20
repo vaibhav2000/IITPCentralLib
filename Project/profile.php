@@ -1,8 +1,13 @@
 <?php
-include('config.php');
 session_start();
-?>
+include('config.php');
 
+if(!isset($_SESSION['curruser']))
+   header('location: index.php');
+else
+ {
+   ?>
+   
 <html>
 <head>
 <title>BookSearch</title>
@@ -34,11 +39,7 @@ session_start();
 
 
 
-<?php
-if(!isset($_SESSION['curruser']))
-   header('location: index.php');
-else
- {
+   <?php
     $q= "select * from librarymember where email='".$_SESSION['curruser']."';";
 
    $res = mysqli_query($conn,$q);

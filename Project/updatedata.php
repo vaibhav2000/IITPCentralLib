@@ -1,7 +1,12 @@
 <?php
-include('config.php');
 session_start();
-?>
+include('config.php');
+
+if(!isset($_SESSION['curruser']))
+   header('location: index.php');
+else
+ {
+   ?>
 
 <html>
 <head>
@@ -34,11 +39,7 @@ session_start();
 
 
 
-<?php
-if(!isset($_SESSION['curruser']))
-   header('location: index.php');
-else
- {
+   <?php
     $q= "select * from librarymember where email='".$_SESSION['curruser']."';";
 
    $res = mysqli_query($conn,$q);
@@ -126,9 +127,8 @@ else
  
  <input  type="submit" value="Update">
 </form>
- 
- </div>
 
+ </div>
  <?php }
  
 
@@ -162,8 +162,10 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
      if($_POST['dob']!= 'NotUpdated')
      {$q= "update librarymember set dob= '".$_POST['dob']."' where email= '".$_SESSION['curruser']."';";
      mysqli_query($conn,$q); }
-        
-     header('location: profile.php');
+    
+     $URL="profile.php";
+echo "<script type='text/javascript'>document.location.href='{$URL}';</script>";
+echo '<META HTTP-EQUIV="refresh" content="0;URL=' . $URL . '">';
 }
  
  ?>
