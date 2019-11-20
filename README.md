@@ -1,4 +1,4 @@
-#IITP Central Library System
+# IITP Central Library System
 
 This PHP-MySQL based web application is made for the purpose of searching library
 books intelligently and efficiently, letting the users sign up and log in to keep track of
@@ -33,3 +33,5 @@ difference of the current date and return date which if happens to be positive, 
 added to the user with the inputted email after multiplying by five.
 Fine Transaction just requires the librarian to enter the email of the library member
 who has submitted the fine and the fine gets updated.
+
+![Screenshot](Images/1.png)
